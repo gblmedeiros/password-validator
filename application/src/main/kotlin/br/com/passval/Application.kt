@@ -20,6 +20,7 @@ class Application {
                 LowerCasePasswordValidator(),
                 UpperCasePasswordValidator(),
                 SpecialCharacterPasswordValidator(),
+                NoWhitespacePasswordValidator(),
                 RepeatedCharacterPasswordValidator()
         )
     }

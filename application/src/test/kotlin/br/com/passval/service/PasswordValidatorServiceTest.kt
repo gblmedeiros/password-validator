@@ -25,7 +25,19 @@ class PasswordValidatorServiceTest {
                     Arguments.of("AbTp9!foo", false),
                     Arguments.of("AbTp9!foA", false),
                     Arguments.of("AbTp9 fok", false),
-                    Arguments.of("AbTp9!fok", true)
+                    Arguments.of("AbTp9!fok", true),
+                    Arguments.of("%", false),
+                    Arguments.of("qqww2233\\", false),
+                    Arguments.of("qAwR2233\\", false),
+                    Arguments.of("qAwR2t3y\\", true),
+                    Arguments.of(" AbTp9fok", false),
+                    Arguments.of("AbTp9fok      ", false),
+                    Arguments.of("AbTp9fok      G", false),
+                    Arguments.of("AbTp9fok G*", false),
+                    Arguments.of("AbTp9fokG*", true),
+                    Arguments.of("*AbTp9fok ", false),
+                    Arguments.of("AbTp9fok* ", false),
+                    Arguments.of("AbTp9fok *", false)
             )
         }
     }

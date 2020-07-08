@@ -7,7 +7,7 @@ import java.util.regex.Pattern
 class SpecialCharacterPasswordValidator: PasswordValidator {
 
     private companion object {
-        val pattern: Pattern = Pattern.compile(".*[[\\S]&&!@#\$%^&(){}\\[\\]:;<>,.?/~_+-=|\\\\]")
+        val pattern: Pattern = Pattern.compile(".*[*!@#$%^&(){}\\[\\]:;<>,.?/~_+\\-=|\\\\].*")
     }
     override fun validate(password: String): PasswordValidation {
         val isValid = pattern.matcher(password).matches()

@@ -10,7 +10,7 @@ import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
-class SpecialCharacterPasswordValidatorTest {
+class NoWhitespacePasswordValidatorTest {
 
     companion object {
         @JvmStatic
@@ -18,25 +18,20 @@ class SpecialCharacterPasswordValidatorTest {
             return Stream.of(
                     Arguments.of("%",  true),
                     Arguments.of("qqww2233#", true),
-                    Arguments.of("qqww2233\\", true),
-                    Arguments.of("AbTp9 fok", false),
-                    Arguments.of(" AbTp9fok", false),
                     Arguments.of("AbTp9fok      ", false),
-                    Arguments.of("AbTp9fok      G", false),
-                    Arguments.of("AbTp9fok      G*", true),
-                    Arguments.of("AbTp9!fok", true),
-                    Arguments.of("*AbTp9fok", true),
-                    Arguments.of("AbTp9fok* ", true)
+                    Arguments.of("*AbTp9 fok", false),
+                    Arguments.of("AbTp9fok* ", false),
+                    Arguments.of(" AbTp9fok", false)
             )
         }
     }
 
     @ParameterizedTest
     @MethodSource("passwords")
-    fun `validate passwords with special characters`(password: String, expected: Boolean) {
-        val validation = SpecialCharacterPasswordValidator().validate(password)
+    fun `validate passwords with whitespace`(password: String, expected: Boolean) {
+        val validation = NoWhitespacePasswordValidator().validate(password)
         assertEquals(expected, validation.valid)
-        assertEquals(PasswordValidationType.SPECIAL_CHARACTER_VALIDATION, validation.type)
+        assertEquals(PasswordValidationType.NO_WHITESPACE_VALIDATION, validation.type)
     }
 
 }
