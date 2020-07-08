@@ -45,6 +45,7 @@ class PasswordValidatorServiceTest {
     @ParameterizedTest
     @MethodSource("passwords")
     fun `should validate password`(password: String, expected: Boolean) {
-        assertEquals(expected, passwordValidatorService.validate(password).valid)
+        val validation = passwordValidatorService.validate(password)
+        assertEquals(expected, validation.valid, validation.msg)
     }
 }
