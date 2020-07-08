@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
+import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers.print
@@ -24,7 +25,12 @@ class PasswordValidationControllerTest {
     @Test
     fun `when password is valid than return true`() {
         val password = "Abc123%th"
-        val response = mockMvc.perform(post("/password/validate", password).param("password", password))
+        val response = mockMvc
+                .perform(post("/password/validate", password)
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                        .param("password", password)
+                        .accept(MediaType.APPLICATION_JSON)
+                )
                 .andDo(print())
                 .andExpect(status().isOk)
                 .andReturn()
@@ -39,7 +45,12 @@ class PasswordValidationControllerTest {
     @Test
     fun `when password is not valid than return false`() {
         val password = "bbb"
-        val response = mockMvc.perform(post("/password/validate", password).param("password", password))
+        val response = mockMvc
+                .perform(post("/password/validate", password)
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                        .param("password", password)
+                        .accept(MediaType.APPLICATION_JSON)
+                )
                 .andDo(print())
                 .andExpect(status().isOk)
                 .andReturn()

@@ -15,8 +15,8 @@ class Application {
     @Bean
     fun passwordValidators(): List<PasswordValidator> {
         return listOf(
-                DigitPasswordValidator(),
                 LengthPasswordValidator(),
+                DigitPasswordValidator(),
                 LowerCasePasswordValidator(),
                 UpperCasePasswordValidator(),
                 SpecialCharacterPasswordValidator(),
