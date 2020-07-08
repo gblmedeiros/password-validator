@@ -1,7 +1,10 @@
 package br.com.passval.validators
 
-import org.junit.jupiter.api.Assertions.*
+import br.com.passval.validation.PasswordValidationType
 import org.junit.jupiter.api.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertFalse
+import kotlin.test.assertTrue
 
 class LengthPasswordValidatorTest {
 
@@ -9,15 +12,16 @@ class LengthPasswordValidatorTest {
     fun `when length greater or equals than min length then return true`() {
         val password = "123456789"
         val validation = LengthPasswordValidator().validate(password)
-        assertTrue(validation.isValid)
+        assertTrue(validation.valid)
+        assertEquals(PasswordValidationType.LENGTH_VALIDATION, validation.type)
     }
 
     @Test
     fun `when length less than min length then return false`() {
         val password = "12345678"
         val validation = LengthPasswordValidator().validate(password)
-        assertFalse(validation.isValid, "Password should have more than 9 characters")
-        assertNotNull(validation.error)
+        assertFalse(validation.valid, "Password should have more than 9 characters")
+        assertEquals(PasswordValidationType.LENGTH_VALIDATION, validation.type)
     }
 
 }
